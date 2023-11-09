@@ -18,38 +18,42 @@ const App = ({ salesTaxRate }: shopProps) => {
   const [cart, setCart] = useState<product[]>([])
 
   return (
-    <div>
-      <button
-        data-testid="dove-soap"
-        onClick={() => setCart(prevCart => [...prevCart, doveSoap])}
-      >
-        {doveSoap.name} - {doveSoap.price}
-      </button>
-      <button
-        data-testid="axe-deo"
-        onClick={() => setCart(prevCart => [...prevCart, axeDeo])}
-      >
-        {axeDeo.name} - {axeDeo.price}
-      </button>
+    <div className="app">
+      <div className="products">
+        <button
+          data-testid="dove-soap"
+          onClick={() => setCart(prevCart => [...prevCart, doveSoap])}
+        >
+          {doveSoap.name} - {doveSoap.price}
+        </button>
+        <button
+          data-testid="axe-deo"
+          onClick={() => setCart(prevCart => [...prevCart, axeDeo])}
+        >
+          {axeDeo.name} - {axeDeo.price}
+        </button>
+      </div>
 
-      <h4>Cart</h4>
+      <div className="cart">
+        <h4>Cart</h4>
 
-      {cart.length > 0 ? (
-        cart.map((product, index) => {
-          return (
-            <div key={index}>
-              <h2>
-                {product.name} - {formatCurrency(product.price)}
-              </h2>
-            </div>
-          )
-        })
-      ) : (
-        <h2>No products to display</h2>
-      )}
+        {cart.length > 0 ? (
+          cart.map((product, index) => {
+            return (
+              <div key={index}>
+                <h2>
+                  {product.name} - {formatCurrency(product.price)}
+                </h2>
+              </div>
+            )
+          })
+        ) : (
+          <h5>No products to display</h5>
+        )}
 
-      <div>
-        Total: {formatCurrency(addSalesTax(getTotalCost(cart), salesTaxRate))}
+        <div>
+          Total: {formatCurrency(addSalesTax(getTotalCost(cart), salesTaxRate))}
+        </div>
       </div>
     </div>
   )
